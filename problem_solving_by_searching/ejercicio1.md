@@ -47,40 +47,54 @@ El algoritmo explora el mapa por "capas" o niveles de profundidad. Utiliza una *
 
 ### 2.2. Búsqueda en Profundidad (DFS)
 
-El árbol de búsqueda generado sigue la siguiente lógica:
 
-### Paso 1: Inicio en (5, 4)
-* El algoritmo expande los vecinos válidos.
-* Se identifican: `(5,3)` [Arriba], `(5,5)` [Abajo], `(4,4)` [Izquierda].
-* **Decisión:** Debido a la prioridad **1. Arriba**, el algoritmo elige visitar inmediatamente `(5, 3)`. Los otros nodos quedan en espera en la Pila.
+- Gestión de la frontera: Se utiliza una PILA (LIFO - Last In, First Out).
+  El último nodo generado es el primero en ser extraído.
+- Orden de operadores: Arriba, Abajo, Izquierda, Derecha.
+- Nota sobre el orden:
+  Para respetar el orden de exploración usando una pila, los nodos hijos se
+  insertan en orden inverso (Derecha, Izquierda, Abajo, Arriba).
+- Control de ciclos:
+  No se permiten nodos repetidos en el camino actual.
 
-### Paso 2: Nodo (5, 3)
-* Desde la nueva posición, se expanden vecinos.
-* Se identifican: `(5,2)` [Arriba], `(4,3)` [Izquierda], `(6,3)` [Derecha]. (Abajo se descarta por estar en lista Cerrada).
-* **Decisión:** Se elige **Arriba** nuevamente, moviéndose a `(5, 2)`.
+## Definición del Problema
 
-### Paso 3: Nodo (5, 2)
-* Se expanden vecinos.
-* Se identifican: `(5,1)` [Arriba], `(6,2)` [Derecha].
-* **Decisión:** Se prioriza **Arriba**, moviéndose a `(5, 1)`.
+- Estado inicial (i): Nodo A (5,4).
+- Estado objetivo (e): Nodo M (2,3).
+- Función de coste (g):
+  - Movimiento vertical: coste 1.
+  - Movimiento horizontal: coste 2.
+  El algoritmo DFS no utiliza el coste para decidir el camino, únicamente se calcula al final para evaluar la solución.
 
-### Paso 4: Nodo (5, 1) - Punto de Giro
-* El algoritmo intenta ir **Arriba**, pero choca con el límite del tablero.
-* Intenta ir **Abajo**, pero el nodo `(5,2)` ya fue visitado.
-* Intenta ir **Izquierda**, y encuentra el nodo `(4, 1)`.
-* Intenta ir **Derecha**, y encuentra el nodo `(6, 1)`.
-* **Decisión:** Por orden de prioridad (Izquierda antes que Derecha), se mueve a `(4, 1)`.
 
-### Paso 5: Nodo (4, 1)
-* **Verificación:** El algoritmo comprueba si este estado coincide con la Meta.
-* **Resultado:** ¡Éxito! Se detiene la búsqueda.
+> ![Árbol DFS](./profundidad/profundidad.png)
 
-## 4. Resultado Final
-El camino encontrado por el algoritmo DFS :
+## Análisis :
 
-**Ruta:** `(5, 4) → (5, 3) → (5, 2) → (5, 1) → (4, 1)`
+### Límite de profundidad = 5
 
-* **Total de pasos:** 4
-* **Nodos expandidos:** 5
-* **Nodos generados pero no visitados:** `(5,5)`, `(4,4)`, `(4,3)`, `(6,3)`, `(6,2)`, `(6,1)`.
----
+El algoritmo explora primero la rama prioritaria:
+
+A → B → E → H → J
+
+El nodo J se encuentra a profundidad 4. Desde este nodo se generan los
+sucesores K (1,5) y L (2,4), ambos a profundidad 5.
+
+Se extrae primero el nodo K. Al intentar expandirlo, sus posibles hijos quedarían
+a profundidad 6, superando el límite establecido, por lo que no se generan
+sucesores.
+
+Posteriormente se extrae el nodo L. Ocurre la misma situación, el límite de
+profundidad impide generar a su hijo M (2,3), que corresponde al estado objetivo.
+
+El algoritmo no falla porque no exista solución, sino porque la solución se
+encuentra a una profundidad mayor (d = 6) que el límite permitido (l = 5).
+
+### Límite de profundidad = 6
+
+Al aumentar el límite de profundidad a 6, cuando el algoritmo procesa el nodo
+L (2,4), que se encuentra a profundidad 5, se permite la generación de sucesores.
+
+En este caso se genera el nodo M (2,3) a profundidad 6.
+
+El test objetivo reconoce el nodo M como solución y el algoritmo finaliza.
