@@ -7,8 +7,8 @@ Este repositorio contiene las soluciones prácticas a los problemas de búsqueda
 
 | Ejercicio | Descripción | Estado |
 | :--- | :--- | :---: |
-| **[Ejercicio 1](./ejercicio1.md)** | **El Laberinto del NPC** <br> Búsqueda de rutas en una cuadrícula $6 \times 5$ con obstáculos. | 🔄 En progreso |
+| **[Ejercicio 1](./ejercicio1.md)** | **El Laberinto del NPC** <br> Búsqueda de rutas en una cuadrícula $6 \times 5$ con obstáculos. | HECHO (PERO HAY QUE CORREGIRLO) |
 | **Ejercicio 2** | **Análisis de Heurísticas** <br> Estudio de la admisibilidad de la Distancia Manhattan. | ❌ Pendiente |
-| **Ejercicio 3** | **Ruta Ourense-Calatayud** <br> Simulación tipo Google Maps usando Coste Uniforme. | ❌ Pendiente |
+| **[Ejercicio 3](./coste_uniforme/coste_uniforme.png)** | **Ruta Ourense-Calatayud** <br> Simulación tipo Google Maps usando Coste Uniforme. | HECHO |
 
 ---
